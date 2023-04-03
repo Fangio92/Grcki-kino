@@ -13,13 +13,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class RoundsFragment : Fragment() {
     private lateinit var binding: FragmentRoundsBinding
     private val viewModel: RoundsViewModel by viewModel()
+    private val adapter = RoundsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRoundsBinding.inflate(layoutInflater, container, false)
-
+        binding.rvRounds.adapter = adapter
         return binding.root
     }
 
@@ -32,9 +33,7 @@ class RoundsFragment : Fragment() {
         viewModel.errors.observe(viewLifecycleOwner) {
             Log.e(TAG, "errors: $it")
         }
-        viewModel.response.observe(viewLifecycleOwner) {
-            Log.i(TAG, "responseSuccessful: $it")
-        }
+        viewModel.response.observe(viewLifecycleOwner, adapter::submitList)
         viewModel.get20Rounds()
     }
 
