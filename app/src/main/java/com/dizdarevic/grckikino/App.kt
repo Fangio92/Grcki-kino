@@ -2,6 +2,7 @@ package com.dizdarevic.grckikino
 
 import android.app.Application
 import com.dizdarevic.grckikino.di.appModule
+import com.dizdarevic.grckikino.di.network.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -13,7 +14,7 @@ class App : Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(appModule)
+            modules(listOf(appModule, networkModule))
         }
     }
 }
