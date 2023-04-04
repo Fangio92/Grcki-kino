@@ -25,7 +25,6 @@ class TalonAdapter(
         override fun TalonItemBinding.bind(item: TalonItem) {
             tvNumber.text = item.item.toString()
             root.setOnClickListener {
-
                 if (!item.selected && list.filter { it.selected }.size >= 15) {
                     Toast.makeText(root.context, "You cant select more than 15 numbers!", Toast.LENGTH_LONG).show()
                     return@setOnClickListener
