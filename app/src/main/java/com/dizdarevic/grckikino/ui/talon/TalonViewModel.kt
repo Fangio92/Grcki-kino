@@ -1,4 +1,4 @@
-package com.dizdarevic.grckikino.ui.rounds
+package com.dizdarevic.grckikino.ui.talon
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,17 +16,17 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-class RoundsViewModel(
+class TalonViewModel(
     private val networkRepository: NetworkRepository
 ) : ViewModel() {
-    val response = MutableStateFlow<GrckiKino?>(null)
+    val response = MutableStateFlow<GrckiKino.GrckiKinoItem?>(null)
 
     private val _errors = Channel<String>(Channel.CONFLATED)
     val errors = _errors.receiveAsFlow()
 
-    fun get20Rounds() = viewModelScope.launch(Dispatchers.IO) {
-        networkRepository.get20Rounds()?.enqueue(object : Callback<GrckiKino?> {
-            override fun onResponse(call: Call<GrckiKino?>, data: Response<GrckiKino?>) {
+    fun getRound(drawId: Int) = viewModelScope.launch(Dispatchers.IO) {
+        networkRepository.getSpecificRound(drawId)?.enqueue(object : Callback<GrckiKino.GrckiKinoItem?> {
+            override fun onResponse(call: Call<GrckiKino.GrckiKinoItem?>, data: Response<GrckiKino.GrckiKinoItem?>) {
                 if (data.isSuccessful && data.body() != null) {
                     response.value = data.body()
                     return
@@ -40,7 +40,7 @@ class RoundsViewModel(
                 }
             }
 
-            override fun onFailure(call: Call<GrckiKino?>, t: Throwable) {
+            override fun onFailure(call: Call<GrckiKino.GrckiKinoItem?>, t: Throwable) {
                 setError(t.message.toString())
             }
         })

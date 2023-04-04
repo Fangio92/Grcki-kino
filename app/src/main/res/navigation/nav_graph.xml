@@ -8,5 +8,18 @@
         android:id="@+id/roundsFragment"
         android:name="com.dizdarevic.grckikino.ui.rounds.RoundsFragment"
         android:label="fragment_rounds"
-        tools:layout="@layout/fragment_rounds" />
+        tools:layout="@layout/fragment_rounds">
+        <action
+            android:id="@+id/toTalonFragment"
+            app:destination="@id/talonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/talonFragment"
+        android:name="com.dizdarevic.grckikino.ui.talon.TalonFragment"
+        android:label="fragment_talon"
+        tools:layout="@layout/fragment_talon">
+        <argument
+            android:name="drawId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

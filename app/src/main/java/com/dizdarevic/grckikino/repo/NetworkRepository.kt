@@ -8,9 +8,9 @@ class NetworkRepository(
     private val api: API,
     private val context: Application
 ) {
-    fun get20Rounds(): Call<GrckiKino>? {
-        val hashMap = HashMap<String, String>()
-        hashMap["Content-Type"] = "application/json"
-        return api.get20Rounds(hashMap)
-    }
+    fun get20Rounds(): Call<GrckiKino>? =
+        api.get20Rounds()
+
+    fun getSpecificRound(drawId: Int) =
+        api.getSpecificRound(drawId)
 }

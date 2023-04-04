@@ -6,14 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.dizdarevic.grckikino.databinding.FragmentRoundsBinding
+import com.dizdarevic.grckikino.repo.model.GrckiKino
 import com.dizdarevic.grckikino.utils.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RoundsFragment : Fragment() {
     private lateinit var binding: FragmentRoundsBinding
     private val viewModel: RoundsViewModel by viewModel()
-    private val adapter = RoundsAdapter()
+    private val adapter = RoundsAdapter { onRoundClick(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +37,10 @@ class RoundsFragment : Fragment() {
         }
         viewModel.response.observe(viewLifecycleOwner, adapter::submitList)
         viewModel.get20Rounds()
+    }
+
+    private fun onRoundClick(kinoItem: GrckiKino.GrckiKinoItem) {
+        findNavController().navigate(RoundsFragmentDirections.toTalonFragment(kinoItem.drawId))
     }
 
     companion object {

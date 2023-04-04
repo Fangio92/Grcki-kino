@@ -9,7 +9,9 @@ import com.dizdarevic.grckikino.repo.model.GrckiKino
 import com.dizdarevic.grckikino.utils.ViewHolder
 import kotlinx.datetime.*
 
-class RoundsAdapter : ListAdapter<GrckiKino.GrckiKinoItem, RoundsAdapter.RoundsViewHolder>(DIFF) {
+class RoundsAdapter(
+    private val onClickAction: (GrckiKino.GrckiKinoItem) -> Unit
+) : ListAdapter<GrckiKino.GrckiKinoItem, RoundsAdapter.RoundsViewHolder>(DIFF) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoundsViewHolder =
         RoundsViewHolder(RoundsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
@@ -19,6 +21,7 @@ class RoundsAdapter : ListAdapter<GrckiKino.GrckiKinoItem, RoundsAdapter.RoundsV
         binding: RoundsItemBinding
     ) : ViewHolder<RoundsItemBinding, GrckiKino.GrckiKinoItem>(binding) {
         override fun RoundsItemBinding.bind(item: GrckiKino.GrckiKinoItem) {
+            root.setOnClickListener { onClickAction.invoke(item) }
             val roundStartDateTime = Instant.fromEpochMilliseconds(item.drawTime).toLocalDateTime(TimeZone.currentSystemDefault())
             val duration = roundStartDateTime.toInstant(TimeZone.currentSystemDefault()).minus(Clock.System.now())
             tvTime.text = roundStartDateTime.time.toString()
