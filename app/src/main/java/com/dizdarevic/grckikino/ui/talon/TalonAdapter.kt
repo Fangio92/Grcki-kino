@@ -3,6 +3,7 @@ package com.dizdarevic.grckikino.ui.talon
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.dizdarevic.grckikino.R
@@ -24,6 +25,11 @@ class TalonAdapter(
         override fun TalonItemBinding.bind(item: TalonItem) {
             tvNumber.text = item.item.toString()
             root.setOnClickListener {
+
+                if (!item.selected && list.filter { it.selected }.size >= 15) {
+                    Toast.makeText(root.context, "You cant select more than 15 numbers!", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
                 item.selected = !item.selected
                 if (item.selected) {
                     frame.background = AppCompatResources.getDrawable(root.context, R.drawable.circle)
