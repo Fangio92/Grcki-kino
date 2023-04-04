@@ -23,7 +23,6 @@ class TalonViewModel(
 
     private val _errors = Channel<String>(Channel.CONFLATED)
     val errors = _errors.receiveAsFlow()
-
     fun getRound(drawId: Int) = viewModelScope.launch(Dispatchers.IO) {
         networkRepository.getSpecificRound(drawId)?.enqueue(object : Callback<GrckiKino.GrckiKinoItem?> {
             override fun onResponse(call: Call<GrckiKino.GrckiKinoItem?>, data: Response<GrckiKino.GrckiKinoItem?>) {
@@ -39,13 +38,11 @@ class TalonViewModel(
                     e.printStackTrace()
                 }
             }
-
             override fun onFailure(call: Call<GrckiKino.GrckiKinoItem?>, t: Throwable) {
                 setError(t.message.toString())
             }
         })
     }
-
     private fun setError(message: String) {
         _errors.trySend(message)
         response.value = null

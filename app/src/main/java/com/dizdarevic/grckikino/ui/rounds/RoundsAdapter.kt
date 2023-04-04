@@ -14,9 +14,7 @@ class RoundsAdapter(
 ) : ListAdapter<GrckiKino.GrckiKinoItem, RoundsAdapter.RoundsViewHolder>(DIFF) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoundsViewHolder =
         RoundsViewHolder(RoundsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
     override fun onBindViewHolder(holder: RoundsViewHolder, position: Int) = holder.bind(getItem(position))
-
     inner class RoundsViewHolder(
         binding: RoundsItemBinding
     ) : ViewHolder<RoundsItemBinding, GrckiKino.GrckiKinoItem>(binding) {
@@ -28,7 +26,6 @@ class RoundsAdapter(
             tvDuration.text = String.format("%02d:%02d", duration.toDateTimePeriod().hours, duration.toDateTimePeriod().minutes)
         }
     }
-
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<GrckiKino.GrckiKinoItem>() {
             override fun areItemsTheSame(oldItem: GrckiKino.GrckiKinoItem, newItem: GrckiKino.GrckiKinoItem): Boolean = oldItem.drawId == newItem.drawId

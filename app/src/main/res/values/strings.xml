@@ -13,4 +13,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="vreme">Vreme izvlacenja</string>
     <string name="preostalo_za_uplatu">Preostalo za uplatu</string>
+    <string name="izvlacenje">Izvlacenje</string>
 </resources>

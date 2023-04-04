@@ -21,5 +21,13 @@
         <argument
             android:name="drawId"
             app:argType="integer" />
+        <action
+            android:id="@+id/toWebViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.dizdarevic.grckikino.ui.WebViewFragment"
+        android:label="fragment_web_view"
+        tools:layout="@layout/fragment_web_view" />
 </navigation>

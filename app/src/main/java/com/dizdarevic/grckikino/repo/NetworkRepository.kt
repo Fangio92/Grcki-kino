@@ -10,7 +10,6 @@ class NetworkRepository(
 ) {
     fun get20Rounds(): Call<GrckiKino>? =
         api.get20Rounds()
-
     fun getSpecificRound(drawId: Int) =
         api.getSpecificRound(drawId)
 }

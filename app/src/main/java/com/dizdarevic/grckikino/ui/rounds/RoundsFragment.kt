@@ -16,7 +16,6 @@ class RoundsFragment : Fragment() {
     private lateinit var binding: FragmentRoundsBinding
     private val viewModel: RoundsViewModel by viewModel()
     private val adapter = RoundsAdapter { onRoundClick(it) }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,12 +24,10 @@ class RoundsFragment : Fragment() {
         binding.rvRounds.adapter = adapter
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeObservers()
     }
-
     private fun subscribeObservers() {
         viewModel.errors.observe(viewLifecycleOwner) {
             Log.e(TAG, "errors: $it")
@@ -38,11 +35,9 @@ class RoundsFragment : Fragment() {
         viewModel.response.observe(viewLifecycleOwner, adapter::submitList)
         viewModel.get20Rounds()
     }
-
     private fun onRoundClick(kinoItem: GrckiKino.GrckiKinoItem) {
         findNavController().navigate(RoundsFragmentDirections.toTalonFragment(kinoItem.drawId))
     }
-
     companion object {
         private const val TAG = "RoundsFragment"
     }

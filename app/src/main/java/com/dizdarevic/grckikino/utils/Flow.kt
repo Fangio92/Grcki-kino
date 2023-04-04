@@ -9,5 +9,4 @@ import kotlinx.coroutines.flow.*
 fun <T> Flow<T>.observe(lifecycleOwner: LifecycleOwner, action: suspend (T) -> Unit) = onEach(action)
     .flowWithLifecycle(lifecycleOwner.lifecycle)
     .launchIn(lifecycleOwner.lifecycleScope)
-
 fun <R> Flow<R>.toStateFlow(coroutineScope: CoroutineScope, initialValue: R) = stateIn(coroutineScope, SharingStarted.Lazily, initialValue)

@@ -23,7 +23,6 @@ class RoundsViewModel(
 
     private val _errors = Channel<String>(Channel.CONFLATED)
     val errors = _errors.receiveAsFlow()
-
     fun get20Rounds() = viewModelScope.launch(Dispatchers.IO) {
         networkRepository.get20Rounds()?.enqueue(object : Callback<GrckiKino?> {
             override fun onResponse(call: Call<GrckiKino?>, data: Response<GrckiKino?>) {
@@ -39,13 +38,11 @@ class RoundsViewModel(
                     e.printStackTrace()
                 }
             }
-
             override fun onFailure(call: Call<GrckiKino?>, t: Throwable) {
                 setError(t.message.toString())
             }
         })
     }
-
     private fun setError(message: String) {
         _errors.trySend(message)
         response.value = null

@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.talon.TalonFragment">
 
+    <Button
+        android:id="@+id/btDraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/izvlacenje"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/bar"
         android:layout_width="match_parent"
@@ -14,7 +23,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="4"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/btDraw">
 
         <TextView
             android:id="@+id/tvTime"
@@ -53,7 +62,6 @@
             android:textSize="22sp"
             tools:text="Text" />
     </LinearLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRound"

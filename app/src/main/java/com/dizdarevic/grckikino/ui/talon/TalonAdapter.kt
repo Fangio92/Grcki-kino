@@ -13,21 +13,17 @@ class TalonAdapter(
     private val onClickAction: () -> Unit
 ) : RecyclerView.Adapter<TalonAdapter.TalonViewHolder>() {
     val list = List(80) { TalonItem(it) }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TalonViewHolder =
         TalonViewHolder(TalonItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
     override fun getItemCount() = list.size
-
     override fun onBindViewHolder(holder: TalonAdapter.TalonViewHolder, position: Int) = holder.bind(list[position])
-
     inner class TalonViewHolder(
         binding: TalonItemBinding
     ) : ViewHolder<TalonItemBinding, TalonItem>(binding) {
         @SuppressLint("SetTextI18n")
         override fun TalonItemBinding.bind(item: TalonItem) {
             tvNumber.text = item.item.toString()
-            frame.setOnClickListener {
+            root.setOnClickListener {
                 item.selected = !item.selected
                 if (item.selected) {
                     frame.background = AppCompatResources.getDrawable(root.context, R.drawable.circle)
@@ -38,7 +34,6 @@ class TalonAdapter(
             }
         }
     }
-
     data class TalonItem(
         var position: Int,
         var item: Int = position + 1,
